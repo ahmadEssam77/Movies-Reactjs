@@ -1,0 +1,50 @@
+
+.logo {
+    font-size: 32px;
+    padding-right: 7px;
+}
+
+.main_select_tabs:hover .select_popup_style {
+    display: block;
+}
+
+.select_popup_style {
+    background-color: aliceblue;
+    width: 150px;
+    color: #323e5e;
+    border-radius: 5px;
+    padding: 5px 0;
+    display: none;
+  }
+
+.select_popup_style li {
+    padding: 7px 17px;
+    padding-bottom: 0;
+}
+
+.select_popup_style li:first-child {
+    padding-top: 13px;
+}
+
+.select_popup_style li:last-child {
+    padding-bottom: 13px;
+}
+
+.select_popup_style li:hover {
+    background-color: rgb(241, 243, 245);
+}
+
+.select_popup_people li {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.black {
+    color: #000;
+}
+
+@media screen and (max-width: 600px) {
+    .social_icons {
+        display: none !important;
+    }
+}
