@@ -2,6 +2,9 @@ import axios from 'axios';
 import Joi from 'joi';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authentication } from '../Firebase/Firebase';
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
 
 export default function Login(props) {
 
@@ -66,6 +69,21 @@ export default function Login(props) {
     return scheme.validate(userLogin, {abortEarly: false});
   }
 
+  // Google Sign-In
+  function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(authentication, provider)
+    .then(({_tokenResponse}) => {
+      localStorage.setItem('userToken', _tokenResponse.idToken);
+      props.getKharaTokenInfo();
+      navigate('/');  // Navigate to home
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    
+  }
+
   return (
     <>
       <form action="" className='w-50 mt-5 mx-auto' onSubmit={loginFun}>
@@ -73,6 +91,9 @@ export default function Login(props) {
           <input type="password" onChange={getUserLoginData} className='form-control mb-2' name="password" placeholder='Password' />
           {isLoading ? <button className='btn btn-outline-info form-control mt-3' type="submit"><i className="fa-solid fa-circle-notch fa-spin"></i></button> : <button className='btn btn-outline-info form-control mt-3' type="submit">Log In</button> }
       </form>
+      <div className='w-50 mx-auto'>
+        <button className='btn btn-outline-danger form-control mt-3' onClick={signInWithGoogle} >Login with google</button>
+      </div>
 
       {errorAPI? <div className='w-50 mt-5 m-auto p-2 alert alert-danger text-center'>{errorAPI}</div>: ''}
       {validateError? <div className='w-50 mt-5 m-auto p-2 alert alert-danger text-center'>{validateError}</div>: ''}

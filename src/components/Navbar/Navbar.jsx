@@ -5,6 +5,7 @@ import style from '../Navbar/Navbar.module.css';
 export default function Navbar(props) {
 
   let token = props.khara;
+  console.log(token.name);
 
   return (
     <>
@@ -64,7 +65,8 @@ export default function Navbar(props) {
             <li className='ps-3'><a href="https://www.themoviedb.org/movie/388757" target='_blank' rel='noopener noreferrer'><i className='fa-brands fa-tiktok'></i></a></li>
             <li className='ps-3'><a href="https://twitter.com/themoviedb?lang=en" target='_blank' rel='noopener noreferrer'><i className='fab fa-twitter'></i></a></li>
             <li className='ps-3 me-4'><a href="https://ca.linkedin.com/company/themoviedb.org" target='_blank' rel='noopener noreferrer'><i className='fab fa-linkedin-in'></i></a></li>
-            {token? <li>Hello {token.first_name}</li> : ''}
+            {token && token.hasOwnProperty('first_name')? <li>Hello {token.first_name}</li> : ''}
+            {token && token.hasOwnProperty('name')? <li>Hello {token.name}</li> : ''}
             {token? '' : <li className='ps-3'><Link to='/register'>Signup</Link></li>}
             {token? '' : <li className='ps-3'><Link to='/login'>Login</Link></li>}
             {token? <li className='ps-3' onClick={props.logout}>Logout</li> : ''}

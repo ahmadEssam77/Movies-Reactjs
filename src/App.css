@@ -1,9 +1,11 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500&display=swap');
+
 
 body {
   background-color: #131722;
   font-family: 'Montserrat', sans-serif;
   color: #fff;
+  font-family: 'Montserrat Alternates', sans-serif;
 }
 
 nav {
@@ -23,6 +25,7 @@ a:hover {
 li {
   cursor: pointer;
 }
+
 
 @media screen and (max-width: 600px) {
   .wrapper {

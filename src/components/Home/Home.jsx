@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import style from '../Home/Home.module.css';
 
 export default function Home(props) {
 
@@ -14,11 +15,12 @@ export default function Home(props) {
           <div className="right">
             <div className="row">
               {props.dataFromAPIInMyArr.map((movie, index)=>
-              <div key={index} className='col-md-3'>
+              <div key={index} className={style.item_container + ' col-md-3 position-relative mb-3'}>
                 <Link to='/details' onClick={()=> props.getDetails('movie', movie.id, props.setMovieDetails)}>
                   <img className='w-100' role="button" src={props.imagePrefix+movie.poster_path} alt="" />  {/*role="button" it's a bootstrap attribute to implement cursor pointer effect*/}
                 </Link>
-                <h5>{movie.title}</h5> 
+                <h5 className={style.item_title + ' text-center py-2'}>{ movie.title }</h5>
+                <div className={style.rating}>{ movie.vote_average }</div> 
               </div>)}
             </div>
             <div>

@@ -1,0 +1,33 @@
+.rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #323e5e;
+  opacity: 0.5;
+  border-radius: 50%;
+  position: absolute;
+  top: 0px;
+  z-index: 555;
+  transition: 1.5s;
+}
+
+.item_container:hover .rating {
+    opacity: 1;
+}
+
+.item_title {
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em darkblue;
+    transition: 1s;
+}
+
+.item_container img {
+    transition: 1s;
+}
+
+.item_container:hover .item_title,
+.item_container:hover img {
+    box-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.2em darkblue;
+}
+
