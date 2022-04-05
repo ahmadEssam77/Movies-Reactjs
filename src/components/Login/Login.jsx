@@ -3,7 +3,7 @@ import Joi from 'joi';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authentication } from '../Firebase/Firebase';
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 
 
 export default function Login(props) {
@@ -80,8 +80,20 @@ export default function Login(props) {
     })
     .catch((err) => {
       console.log(err);
+    }) 
+  }
+
+  function signInWithFacebook() {
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(authentication, provider)
+    .then(({_tokenResponse}) => {
+      localStorage.setItem('userToken', _tokenResponse.idToken);
+      props.getKharaTokenInfo();
+      navigate('/');  // Navigate to home
     })
-    
+    .catch((err) => {
+      console.log(err);
+    }) 
   }
 
   return (
@@ -89,10 +101,13 @@ export default function Login(props) {
       <form action="" className='w-50 mt-5 mx-auto' onSubmit={loginFun}>
           <input type="email" onChange={getUserLoginData} className='form-control mb-2' name="email" placeholder='Email' />
           <input type="password" onChange={getUserLoginData} className='form-control mb-2' name="password" placeholder='Password' />
-          {isLoading ? <button className='btn btn-outline-info form-control mt-3' type="submit"><i className="fa-solid fa-circle-notch fa-spin"></i></button> : <button className='btn btn-outline-info form-control mt-3' type="submit">Log In</button> }
+          {isLoading ? <button className='btn btn-outline-warning form-control mt-3' type="submit"><i className="fa-solid fa-circle-notch fa-spin"></i></button> : <button className='btn btn-outline-warning form-control mt-3' type="submit">Log In</button> }
       </form>
       <div className='w-50 mx-auto'>
         <button className='btn btn-outline-danger form-control mt-3' onClick={signInWithGoogle} >Login with google</button>
+      </div>
+      <div className='w-50 mx-auto'>
+        <button className='btn btn-outline-info form-control mt-3' onClick={signInWithFacebook} >Login with facebook</button>
       </div>
 
       {errorAPI? <div className='w-50 mt-5 m-auto p-2 alert alert-danger text-center'>{errorAPI}</div>: ''}
